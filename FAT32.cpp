@@ -54,7 +54,247 @@ FAT32::~FAT32()
 	this->_signature = "";
 }
 
-string getHex(BYTE* sector, int start, int end, bool reverse)
+string FAT32::get_jmpInstruction()
+{
+	return this->_jmpInstruction;
+}
+
+string FAT32::get_OEMID()
+{
+	return this->_OEMID;
+}
+
+int FAT32::get_bytesPerSector()
+{
+	return this->_bytesPerSector;
+}
+
+int FAT32::get_sectorsPerCluster()
+{
+	return this->_sectorsPerCluster;
+}
+
+int FAT32::get_reservedSector()
+{
+	return this->_reservedSector;
+}
+
+int FAT32::get_numberOfFATs()
+{
+	return this->_numberOfFATs;
+}
+
+string FAT32::get_mediaDescriptor()
+{
+	return this->_mediaDescriptor;
+}
+
+int FAT32::get_sectorPerTrack()
+{
+	return this->_sectorPerTrack;
+}
+
+string FAT32::get_numberOfHeads()
+{
+	return this->_numberOfHeads;
+}
+
+ll FAT32::get_hiddenSectors()
+{
+	return this->_hiddenSectors;
+}
+
+ll FAT32::get_totalSector()
+{
+	return this->_totalSector;
+}
+
+ll FAT32::get_sectorPerFAT()
+{
+	return this->_sectorPerFAT;
+}
+
+string FAT32::get_version()
+{
+	return this->_version;
+}
+
+int FAT32::get_rootCluster()
+{
+	return this->_rootCluster;
+}
+
+int FAT32::get_systemInformation()
+{
+	return this->_systemInformation;
+}
+
+int FAT32::get_backupBootSector()
+{
+	return this->_backupBootSector;
+}
+
+int FAT32::get_physicalDrive()
+{
+	return this->_physicalDrive;
+}
+
+string FAT32::get_extendedSignature()
+{
+	return this->_extendedSignature;
+}
+
+string FAT32::get_serialNumber()
+{
+	return this->_serialNumber;
+}
+
+string FAT32::get_volumeNumber()
+{
+	return this->_volumeNumber;
+}
+
+string FAT32::get_fileSystem()
+{
+	return this->_fileSystem;
+}
+
+string FAT32::get_bootstrapCode()
+{
+	return this->_bootstrapCode;
+}
+
+string FAT32::get_signature()
+{
+	return this->_signature;
+}
+
+vector<File *> FAT32::get_listFile()
+{
+	return this->listFile;
+}
+
+void FAT32::set_jmpInstruction(string jmpInstruction)
+{
+	this->_jmpInstruction = jmpInstruction;
+}
+
+void FAT32::set_OEMID(string OEMID)
+{
+	this->_OEMID = OEMID;
+}
+
+void FAT32::set_bytesPerSector(int bytesPerSector)
+{
+	this->_bytesPerSector = bytesPerSector;
+}
+
+void FAT32::set_sectorsPerCluster(int sectorsPerCluster)
+{
+	this->_sectorsPerCluster = sectorsPerCluster;
+}
+
+void FAT32::set_reservedSector(int reservedSector)
+{
+	this->_reservedSector = reservedSector;
+}
+
+void FAT32::set_numberOfFATs(int numberOfFATs)
+{
+	this->_numberOfFATs = numberOfFATs;
+}
+
+void FAT32::set_mediaDescriptor(string mediaDescriptor)
+{
+	this->_mediaDescriptor = mediaDescriptor;
+}
+
+void FAT32::set_sectorPerTrack(int sectorPerTrack)
+{
+	this->_sectorPerTrack = sectorPerTrack;
+}
+
+void FAT32::set_numberOfHeads(int numberOfHeads)
+{
+	this->_numberOfHeads = numberOfHeads;
+}
+
+void FAT32::set_hiddenSectors(int hiddenSectors)
+{
+	this->_hiddenSectors = hiddenSectors;
+}
+
+void FAT32::set_totalSector(int totalSector)
+{
+	this->_totalSector = totalSector;
+}
+
+void FAT32::set_sectorPerFAT(int sectorPerFAT)
+{
+	this->_sectorPerFAT = sectorPerFAT;
+}
+
+void FAT32::set_version(string version)
+{
+	this->_version = version;
+}
+
+void FAT32::set_rootCluster(int rootCluster)
+{
+	this->_rootCluster = rootCluster;
+}
+
+void FAT32::set_systemInformation(int systemInformation)
+{
+	this->_systemInformation = systemInformation;
+}
+
+void FAT32::set_backupBootSector(int backupBootSector)
+{
+	this->_backupBootSector = backupBootSector;
+}
+
+void FAT32::set_physicalDrive(int physicalDrive)
+{
+	this->_physicalDrive = physicalDrive;
+}
+
+void FAT32::set_extendedSignature(string extendedSignature)
+{
+	this->_extendedSignature = extendedSignature;
+}
+
+void FAT32::set_serialNumber(string serialNumber)
+{
+	this->_serialNumber = serialNumber;
+}
+
+void FAT32::set_volumeNumber(string volumeNumber)
+{
+	this->_volumeNumber = volumeNumber;
+}
+
+void FAT32::set_fileSystem(string fileSystem)
+{
+	this->_fileSystem = fileSystem;
+}
+
+void FAT32::set_bootstrapCode(string bootstrapCode)
+{
+	this->_bootstrapCode = bootstrapCode;
+}
+
+void FAT32::set_signature(string signature)
+{
+	this->_signature = signature;
+}
+
+void FAT32::set_listFile(vector<File *> listFile)
+{
+	this->listFile = listFile;
+}
+
+string getHex(BYTE *sector, int start, int end, bool reverse)
 {
 	string result = "";
 
@@ -73,10 +313,10 @@ string getHex(BYTE* sector, int start, int end, bool reverse)
 	return result;
 }
 
-const int _fat32[29] = { 3, 8, 2, 1, 2, 1, 2, 2, 1, 2, 2, 2, 4, 4, 4, 2, 2, 4, 2, 2, 12, 1, 1, 1, 4, 11, 8, 420, 2 };
+const int _fat32[29] = {3, 8, 2, 1, 2, 1, 2, 2, 1, 2, 2, 2, 4, 4, 4, 2, 2, 4, 2, 2, 12, 1, 1, 1, 4, 11, 8, 420, 2};
 void FAT32::readBootSector(LPCWSTR drive)
 {
-	BYTE* sector = new BYTE[512];
+	BYTE *sector = new BYTE[512];
 	LARGE_INTEGER readPoint;
 	readPoint.QuadPart = 0;
 	readByte(drive, readPoint, sector, 512);
@@ -96,17 +336,17 @@ void FAT32::readBootSector(LPCWSTR drive)
 			cur = getHex(sector, count, count + _fat32[i], 0);
 			this->_OEMID = hexToASCII(cur);
 			break;
-			
+
 		case 2:
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_bytesPerSector = hexToDec(cur);
 			break;
-			
+
 		case 3:
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_sectorsPerCluster = hexToDec(cur);
 			break;
-			
+
 		case 4:
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_reservedSector = hexToDec(cur);
@@ -117,19 +357,24 @@ void FAT32::readBootSector(LPCWSTR drive)
 			this->_numberOfFATs = hexToDec(cur);
 			break;
 
-		case 6: case 7: case 9: case 15: case 20: case 22:
+		case 6:
+		case 7:
+		case 9:
+		case 15:
+		case 20:
+		case 22:
 			break;
-		
+
 		case 8:
 			cur = getHex(sector, count, count + _fat32[i], 0);
 			this->_mediaDescriptor = cur;
 			break;
-		
+
 		case 10:
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_sectorPerTrack = hexToDec(cur);
 			break;
-		
+
 		case 11:
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_numberOfHeads = hexToDec(cur);
@@ -163,7 +408,7 @@ void FAT32::readBootSector(LPCWSTR drive)
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_systemInformation = hexToDec(cur);
 			break;
-		
+
 		case 19:
 			cur = getHex(sector, count, count + _fat32[i], 1);
 			this->_backupBootSector = hexToDec(cur);
@@ -208,7 +453,7 @@ void FAT32::readBootSector(LPCWSTR drive)
 	}
 }
 
-string getNextCluster(BYTE* sector, int index)
+string getNextCluster(BYTE *sector, int index)
 {
 	string result = "";
 	int start = index * 4;
@@ -218,7 +463,7 @@ string getNextCluster(BYTE* sector, int index)
 	return result;
 }
 
-vector<int> getCluster(BYTE* sector, int clusterStart)
+vector<int> getCluster(BYTE *sector, int clusterStart)
 {
 	static string _EOF = "0FFFFFFF";
 
@@ -235,7 +480,7 @@ vector<int> getCluster(BYTE* sector, int clusterStart)
 	return result;
 }
 
-string getNameSupEntry(BYTE* sector, int start)
+string getNameSupEntry(BYTE *sector, int start)
 {
 	string result = "";
 
@@ -257,7 +502,7 @@ string getNameSupEntry(BYTE* sector, int start)
 	return result;
 }
 
-string getNameMainEntry(BYTE* sector, int start)
+string getNameMainEntry(BYTE *sector, int start)
 {
 	string result = "";
 
@@ -266,13 +511,13 @@ string getNameMainEntry(BYTE* sector, int start)
 	return result;
 }
 
-vector<File*> FAT32::readRDET(LPCWSTR drive, int clusterStart)
+vector<File *> FAT32::readRDET(LPCWSTR drive, int clusterStart)
 {
-	vector<File*> result;
+	vector<File *> result;
 	LARGE_INTEGER readPoint;
 	readPoint.QuadPart = ((clusterStart - 2) + this->_reservedSector + this->_numberOfFATs * this->_sectorPerFAT) * this->_bytesPerSector;
 	ll size = this->_sectorsPerCluster * this->_bytesPerSector;
-	BYTE* sector = new BYTE[size];
+	BYTE *sector = new BYTE[size];
 
 	if (readByte(drive, readPoint, sector, size))
 	{
@@ -297,7 +542,6 @@ vector<File*> FAT32::readRDET(LPCWSTR drive, int clusterStart)
 				cout << cur << endl;
 				cur = "";
 			}
-			
 		}
 	}
 
@@ -308,7 +552,7 @@ void FAT32::readFile(LPCWSTR drive)
 {
 	LARGE_INTEGER readPointer;
 	readPointer.QuadPart = 1797120;
-	BYTE* sector = new BYTE[7490048];
+	BYTE *sector = new BYTE[7490048];
 	readByte(drive, readPointer, sector, 7490048);
 
 	vector<int> rdet = getCluster(sector, this->_rootCluster);
