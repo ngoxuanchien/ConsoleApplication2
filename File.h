@@ -9,6 +9,17 @@ using namespace std;
 struct dateTime
 {
 	int date, month, year, hour, minute, second, milisecond;
+
+	dateTime()
+	{
+		date = 0;
+		month = 0;
+		year = 1980;
+		hour = 0;
+		minute = 0;
+		second = 0;
+		milisecond = 0;
+	}
 };
 
 class File
@@ -28,19 +39,6 @@ public:
 
 	File();
 	~File();
-
-	// setter
-	void setName(const string&);
-	void setSize(const ll&);
-	void setSector(const ll&);
-	void setListSector(vector<ll>);
-
-	// getter
-	string getName();
-	ll getSize();
-	ll getSector();
-	string getStatus();
-	vector<ll> getListSector();
 
 };
 
