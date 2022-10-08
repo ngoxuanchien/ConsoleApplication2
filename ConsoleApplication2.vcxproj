@@ -130,13 +130,13 @@
     <ClCompile Include="ConsoleApplication2.cpp" />
     <ClCompile Include="FAT32.cpp" />
     <ClCompile Include="File.cpp" />
-    <ClCompile Include="Forder.cpp" />
+    <ClCompile Include="Folder.cpp" />
     <ClCompile Include="Function.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FAT32.h" />
     <ClInclude Include="File.h" />
-    <ClInclude Include="Forder.h" />
+    <ClInclude Include="Folder.h" />
     <ClInclude Include="Function.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

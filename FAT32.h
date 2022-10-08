@@ -31,6 +31,7 @@ private:
 	
 	vector<File*> _listFile;
 
+	// function
 	vector<File*> readRDET(LPCWSTR, int);
 
 public:

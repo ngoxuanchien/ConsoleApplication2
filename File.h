@@ -33,12 +33,29 @@ protected:
 	dateTime _lastAccess;
 	dateTime _lastEdit;
 	ll _clusterStart;
-	vector<ll> _listSec;
+	vector<ll> _listSector;
 
 public:
-
 	File();
 	~File();
 
-};
+	void setName(const string &);
+	void setFileSize(const ll &);
+	void setSector(const ll &);
+	void setAttributes(const string &);
+	void setDateCreate(const dateTime &);
+	void setLastAccess(const dateTime &);
+	void setLatstEdit(const dateTime &);
+	void setClusterStart(const ll &);
+	void setListSector(const vector<ll> &);
 
+	string getName();
+	ll getFileSize();
+	ll getSector();
+	string getAttributes();
+	dateTime getDateCreate();
+	dateTime getLastAccess();
+	dateTime getLatstEdit();
+	ll getClusterStart();
+	vector<ll> getListSector();
+};

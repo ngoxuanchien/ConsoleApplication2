@@ -24,7 +24,7 @@
     <ClCompile Include="File.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Forder.cpp">
+    <ClCompile Include="Folder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FAT32.cpp">
@@ -38,7 +38,7 @@
     <ClInclude Include="File.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Forder.h">
+    <ClInclude Include="Folder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FAT32.h">
