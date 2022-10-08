@@ -6,13 +6,22 @@ using namespace std;
 
 #define ll long long
 
+struct dateTime
+{
+	int date, month, year, hour, minute, second, milisecond;
+};
+
 class File
 {
 protected:
 	string _name;
-	ll _size;
+	ll _fileSize;
 	ll _sector;
-	string _status;
+	string _attributes;
+	dateTime _dateCreate;
+	dateTime _lastAccess;
+	dateTime _lastEdit;
+	ll _clusterStart;
 	vector<ll> _listSec;
 
 public:

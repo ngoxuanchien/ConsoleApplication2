@@ -132,7 +132,6 @@
     <ClCompile Include="File.cpp" />
     <ClCompile Include="Forder.cpp" />
     <ClCompile Include="Function.cpp" />
-    <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FAT32.h" />

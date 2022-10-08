@@ -14,23 +14,31 @@ private:
 	string _mediaDescriptor;
 	int _sectorPerTrack;
 	int _numberOfHeads;
-	int _hiddenSectors;
+	ll _hiddenSectors;
 	ll _totalSector;
 	ll _sectorPerFAT;
 	string _version;
 	int _rootCluster;
 	int _systemInformation;
 	int _backupBootSector;
-	string _physicalDrive;
+	int _physicalDrive;
 	string _extendedSignature;
 	string _serialNumber;
 	string _volumeNumber;
 	string _fileSystem;
-	BYTE _bootstrapCode[420];
+	string _bootstrapCode;
 	string _signature;
 	
 	vector<File*> _listFile;
 
+	vector<File*> readRDET(LPCWSTR, int);
+
 public:
+	FAT32();
+	~FAT32();
+
+	void readBootSector(LPCWSTR);
+	void readFile(LPCWSTR);
+	void output();
 };
 

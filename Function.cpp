@@ -95,7 +95,7 @@ string hexToASCII(string hex)
 /// </summary>
 /// <param name="hexdec">day hexa can chuyen</param>
 /// <returns>day bin</returns>
-string HexToBin(string hexdec)
+string hexToBin(string hexdec)
 {
     string result = "";
     int i = 0;
@@ -169,72 +169,11 @@ string HexToBin(string hexdec)
 /// </summary>
 /// <param name="hex">day hex can chuyen</param>
 /// <returns>gia tri chuyen</returns>
-int hexToDec(string hex)
+long long hexToDec(string hex)
 {
-    int result = 0;
+    long long result = 0;
 
     result = stoi(hex, 0, 16);
 
     return result;
 }
-
-const int _fat32[29] = { 3, 8, 2, 1, 2, 1, 2, 2, 1, 2, 2, 2, 4, 4, 4, 2, 2, 4, 2, 2, 12, 1, 1, 1, 4, 11, 8, 420, 2 };
-//int readBootSectorFAT32(LPCWSTR drive, FAT32* that)
-//{
-//    BYTE* sector = new BYTE[512];
-//    LARGE_INTEGER readPoint;
-//    readPoint.QuadPart = 0;
-//    if (!readByte(drive, readPoint, sector, 512))
-//    {
-//        return 0;
-//    }
-//
-//    int k = 0;
-//    string cur = "";
-//    for (int i = 0; i < 29; i++)
-//    {
-//        cur = "";
-//
-//        for (int j = 0; j < _fat32[i]; j++)
-//        {
-//            switch (i)
-//            {
-//            case 26:
-//                cur = cur + (char)sector[k];
-//                break;
-//            case 2: case 3: case 4: case 5: case 13: case 14: case 17: case 18: case 19:
-//                cur = toHex((int)sector[k]) + cur;
-//                break;
-//            }
-//
-//            k++;
-//        }
-//
-//        switch (i)
-//        {
-//        case 2:
-//            that->setSizeSector(hexToDec(cur));
-//            break;
-//        case 3:
-//            that->setSizeCluster(HexToDec(cur));
-//            break;
-//        case 4:
-//            that->setSizeBootSector(hexToDec(cur));
-//            break;
-//        case 5:
-//            that->setNumFat(HexToDec(cur));
-//            break;
-//        case 13:
-//            that->setSizeVolume(hexToDec(cur));
-//            break;
-//        case 14:
-//            that->setSizeFat(hexToDec(cur));
-//            break;
-//        case 26:
-//            that->setTypeFat(cur);
-//            break;
-//        }
-//
-//    }
-//    return 1;
-//}
