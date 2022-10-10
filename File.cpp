@@ -5,7 +5,7 @@ File::File()
 	this->_name = "";
 	this->_fileSize = 0;
 	this->_sector = 0;
-	this->_attributes = "";
+	this->_attributes = 0;
 	this->_dateCreate;
 	this->_lastAccess;
 	this->_lastEdit;
@@ -17,7 +17,7 @@ File::~File()
 	this->_name = "";
 	this->_fileSize = 0;
 	this->_sector = 0;
-	this->_attributes = "";
+	this->_attributes = 0;
 	this->_dateCreate;
 	this->_lastAccess;
 	this->_lastEdit;
@@ -39,7 +39,7 @@ void File::setSector(const ll &sector)
 	this->_sector = sector;
 }
 
-void File::setAttributes(const string &attributes)
+void File::setAttributes(const int &attributes)
 {
 	this->_attributes = attributes;
 }
@@ -71,7 +71,25 @@ void File::setListSector(const vector<ll> &listSector)
 
 string File::getName()
 {
-	return string(this->_name);
+	string result = (string)this->_name;
+	int index = result.length();
+	//cout << (int)result[index - 1] << endl;
+	//cout << sizeof(result[0]) << endl;
+	int count = 0;
+	//cout << result.length() << " ";
+	while ((result[index - 1] == ' ' || result[index - 1] == char(-1) || result[index-1] == char(0)) && index >= 0)
+	{
+		//cout << "D" << endl;
+		result.pop_back();
+		index--;
+		count++;
+	}
+	/*cout << count << endl;
+	cout << result << " " << result.length() << endl;*/
+	//cout << (int)result[index - 1] << endl;
+	result[index] = '\0';
+	this->_name = result;
+	return string(result);
 }
 
 ll File::getFileSize()
@@ -86,12 +104,47 @@ ll File::getSector()
 
 string File::getAttributes()
 {
-	return string(this->_attributes);
+	string result = "";
+	int temp = this->_attributes;
+
+	if ((temp & 1) == 1)
+	{
+		result = result + " ReadOnly ";
+	}
+
+	if (((temp >> 1) & 1) == 1)
+	{
+		result = result + " Hidden ";
+	}
+
+	if (((temp >> 2) & 1) == 1)
+	{
+		result = result + " System ";
+	}
+
+	if (((temp >> 3) & 1) == 1)
+	{
+		result = result + " Volabel ";
+	}
+
+	if (((temp >> 4) & 1) == 1)
+	{
+		result = result + " Directory ";
+	}
+
+	if (((temp >> 5) & 1) == 1)
+	{
+		result = result + " Archive ";
+	}
+
+	return string(result);
 }
 
-dateTime File::getDateCreate()
+string File::getDateCreate()
 {
-	return dateTime(this->_dateCreate);
+	string result = "";
+	result = toString(this->_dateCreate.year) + "-" + toString(this->_dateCreate.month) + "-" + toString(this->_dateCreate.date) + "  " + toString(this->_dateCreate.hour) + ":" + toString(this->_dateCreate.minute);
+	return result;
 }
 
 dateTime File::getLastAccess()
@@ -112,4 +165,17 @@ ll File::getClusterStart()
 vector<ll> File::getListSector()
 {
 	return vector<ll>(this->_listSector);
+}
+
+bool File::isForder()
+{
+	bool result = false;
+	int temp = this->_attributes;
+
+	if (((temp >> 4) & 1) == 1)
+	{
+		result = true;
+	}
+
+	return result;
 }

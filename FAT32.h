@@ -1,6 +1,7 @@
 #pragma once
 #include "Function.h"
 #include "Folder.h"
+#include <iomanip>
 
 
 class FAT32
@@ -33,7 +34,7 @@ private:
 	vector<File *> _listFile;
 
 	// function
-	vector<File*> readRDET(LPCWSTR, int);
+	vector<File*> readRDET(LPCWSTR, ll);
 	vector<ll> readListSector(LPCWSTR, ll);
 
 public:
@@ -93,8 +94,11 @@ public:
 	void setSignature(string);
 	void setListFile(vector<File *>);
 
+	void printF(vector<File*>);
 	void readBootSector(LPCWSTR);
-	void readFile(LPCWSTR);
+	vector<File*> readFile(LPCWSTR, ll);
 	void output();
+	bool showFolder(LPCWSTR, const string&);
+	bool loadFile(LPCWSTR, string);
 };
 

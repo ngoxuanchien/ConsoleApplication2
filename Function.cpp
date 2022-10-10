@@ -84,6 +84,11 @@ string hexToASCII(string hex)
 
         char ch = stoul(part, nullptr, 16);
 
+       if (ch == char(-1) || ch == char(0))
+       {
+           continue;
+       }
+
         ascii += ch;
     }
 
@@ -196,4 +201,38 @@ int binToDec(string bin)
     }
 
     return dec_value;
+}
+
+string toString(int value)
+{
+    string result = to_string(value);
+    while (result.length() < 2)
+    {
+        result = "0" + result;
+    }
+    return string(result);
+}
+
+LPWSTR ConvertString(const std::string& instr)
+{
+    // Assumes std::string is encoded in the current Windows ANSI codepage
+    int bufferlen = ::MultiByteToWideChar(CP_ACP, 0, instr.c_str(), instr.size(), NULL, 0);
+
+    if (bufferlen == 0)
+    {
+        // Something went wrong. Perhaps, check GetLastError() and log.
+        return 0;
+    }
+
+    // Allocate new LPWSTR - must deallocate it later
+    LPWSTR widestr = new WCHAR[bufferlen + 1];
+
+    ::MultiByteToWideChar(CP_ACP, 0, instr.c_str(), instr.size(), widestr, bufferlen);
+
+    // Ensure wide string is null terminated
+    widestr[bufferlen] = 0;
+
+    // Do something with widestr
+    return widestr;
+    //delete[] widestr;
 }

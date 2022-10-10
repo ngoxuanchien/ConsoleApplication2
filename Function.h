@@ -15,7 +15,8 @@ string hexToASCII(string);
 string hexToBin(string);
 long long hexToDec(string);
 int binToDec(string);
-//int readBootSectorFAT32(LPCWSTR, FAT32*);
+string toString(int);
+LPWSTR ConvertString(const std::string& instr);
 
 #endif // !_FUNCTION_
 

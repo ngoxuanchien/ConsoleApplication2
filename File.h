@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 #include <vector>
+#include "Function.h"
 
 using namespace std;
 
@@ -28,7 +29,7 @@ protected:
 	string _name;
 	ll _fileSize;
 	ll _sector;
-	string _attributes;
+	int _attributes;
 	dateTime _dateCreate;
 	dateTime _lastAccess;
 	dateTime _lastEdit;
@@ -42,7 +43,7 @@ public:
 	void setName(const string &);
 	void setFileSize(const ll &);
 	void setSector(const ll &);
-	void setAttributes(const string &);
+	void setAttributes(const int &);
 	void setDateCreate(const dateTime &);
 	void setLastAccess(const dateTime &);
 	void setLatstEdit(const dateTime &);
@@ -53,9 +54,10 @@ public:
 	ll getFileSize();
 	ll getSector();
 	string getAttributes();
-	dateTime getDateCreate();
+	string getDateCreate();
 	dateTime getLastAccess();
 	dateTime getLatstEdit();
 	ll getClusterStart();
 	vector<ll> getListSector();
+	bool isForder();
 };
