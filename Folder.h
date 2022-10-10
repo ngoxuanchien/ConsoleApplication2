@@ -10,8 +10,9 @@ public:
 	Folder();
 	~Folder();
 
-	void setListFile(vector<File*>);
+	void setListFile(vector<File*>&);
 	
 	vector<File*> getListFile();
+	void addFolder(File*);
 };
 

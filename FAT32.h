@@ -1,6 +1,7 @@
 #pragma once
 #include "Function.h"
-#include "File.h"
+#include "Folder.h"
+
 
 class FAT32
 {
@@ -33,63 +34,64 @@ private:
 
 	// function
 	vector<File*> readRDET(LPCWSTR, int);
+	vector<ll> readListSector(LPCWSTR, ll);
 
 public:
 	FAT32();
 	~FAT32();
 
 	// getter
-	string get_jmpInstruction();
-	string get_OEMID();
-	int get_bytesPerSector();
-	int get_sectorsPerCluster();
-	int get_reservedSector();
-	int get_numberOfFATs();
-	string get_mediaDescriptor();
-	int get_sectorPerTrack();
-	int get_numberOfHeads();
-	ll get_hiddenSectors();
-	ll get_totalSector();
-	ll get_sectorPerFAT();
-	string get_version();
-	int get_rootCluster();
-	int get_systemInformation();
-	int get_backupBootSector();
-	int get_physicalDrive();
-	string get_extendedSignature();
-	string get_serialNumber();
-	string get_volumeNumber();
-	string get_fileSystem();
-	string get_bootstrapCode();
-	string get_signature();
-	vector<File *> get_listFile();
+	string getJmpInstruction();
+	string getOEMID();
+	int getBytesPerSector();
+	int getSectorsPerCluster();
+	int getReservedSector();
+	int getNumberOfFATs();
+	string getMediaDescriptor();
+	int getSectorPerTrack();
+	int getNumberOfHeads();
+	ll getHiddenSectors();
+	ll getTotalSector();
+	ll getSectorPerFAT();
+	string getVersion();
+	int getRootCluster();
+	int getSystemInformation();
+	int getBackupBootSector();
+	int getPhysicalDrive();
+	string getExtendedSignature();
+	string getSerialNumber();
+	string getVolumeNumber();
+	string getFileSystem();
+	string getBootstrapCode();
+	string getSignature();
+	vector<File*> getListFile();
 
 	// setter
 
-	void set_jmpInstruction(string);
-	void set_OEMID(string);
-	void set_bytesPerSector(int);
-	void set_sectorsPerCluster(int);
-	void set_reservedSector(int);
-	void set_numberOfFATs(int);
-	void set_mediaDescriptor(string);
-	void set_sectorPerTrack(int);
-	void set_numberOfHeads(int);
-	void set_hiddenSectors(ll);
-	void set_totalSector(ll);
-	void set_sectorPerFAT(int);
-	void set_version(string);
-	void set_rootCluster(int);
-	void set_systemInformation(int);
-	void set_backupBootSector(int);
-	void set_physicalDrive(int);
-	void set_extendedSignature(string);
-	void set_serialNumber(string);
-	void set_volumeNumber(string);
-	void set_fileSystem(string);
-	void set_bootstrapCode(string);
-	void set_signature(string);
-	void set_listFile(vector<File *>);
+	void setJmpInstruction(string);
+	void setOEMID(string);
+	void setBytesPerSector(int);
+	void setSectorsPerCluster(int);
+	void setReservedSector(int);
+	void setNumberOfFATs(int);
+	void setMediaDescriptor(string);
+	void setSectorPerTrack(int);
+	void setNumberOfHeads(int);
+	void setHiddenSectors(ll);
+	void setTotalSector(ll);
+	void setSectorPerFAT(int);
+	void setVersion(string);
+	void setRootCluster(int);
+	void setSystemInformation(int);
+	void setBackupBootSector(int);
+	void setPhysicalDrive(int);
+	void setExtendedSignature(string);
+	void setSerialNumber(string);
+	void setVolumeNumber(string);
+	void setFileSystem(string);
+	void setBootstrapCode(string);
+	void setSignature(string);
+	void setListFile(vector<File *>);
 
 	void readBootSector(LPCWSTR);
 	void readFile(LPCWSTR);

@@ -14,6 +14,7 @@ string toHex(int);
 string hexToASCII(string);
 string hexToBin(string);
 long long hexToDec(string);
+int binToDec(string);
 //int readBootSectorFAT32(LPCWSTR, FAT32*);
 
 #endif // !_FUNCTION_
