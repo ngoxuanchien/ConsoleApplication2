@@ -1,4 +1,5 @@
 #include "FAT32.h"
+#include "NTFS.h"
 using namespace std;
 
 bool ktDrive(char c)
