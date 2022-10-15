@@ -1,9 +1,11 @@
 #pragma once
+#include <iostream>
 #include <string>
 #include <vector>
 #include "Function.h"
 
 using namespace std;
+
 
 #define ll long long
 
@@ -21,11 +23,12 @@ struct dateTime
 		second = 0;
 		milisecond = 0;
 	}
+	
 };
 
 class File
 {
-protected:
+private:
 	string _name;
 	ll _fileSize;
 	ll _sector;
@@ -60,4 +63,6 @@ public:
 	ll getClusterStart();
 	vector<ll> getListSector();
 	bool isForder();
+	void printFile();
+	
 };

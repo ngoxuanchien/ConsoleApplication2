@@ -1,8 +1,10 @@
 #pragma once
 #include "Function.h"
-#include "Folder.h"
 #include <iomanip>
+#include <sstream>
+#include "File.h"
 
+using namespace std;
 
 class FAT32
 {
@@ -100,5 +102,6 @@ public:
 	void output();
 	bool showFolder(LPCWSTR, const string&);
 	bool loadFile(LPCWSTR, string);
+	bool fileInf(string);
 };
 

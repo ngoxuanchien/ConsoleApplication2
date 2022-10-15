@@ -179,3 +179,25 @@ bool File::isForder()
 
 	return result;
 }
+
+ostream& operator<<(ostream& outDevice, dateTime& date)
+{
+	outDevice << date.year << "-" << date.month << "-" << date.date << " " << date.hour << ":" << date.minute;
+	return outDevice;
+}
+
+void File::printFile()
+{
+	cout << "File name: " << this->_name << endl;
+	cout << "Size: " << this->_fileSize << endl;
+	cout << "Sector: ";
+	for (int i = 0; i < this->_listSector.size(); i++)
+	{
+		cout << this->_listSector[i] << " ";
+	}
+	cout << endl;
+	cout << "Date create: " << this->_dateCreate << endl;
+	cout << "Last access: " << this->_lastAccess << endl;
+	cout << "Last edit: " << this->_lastEdit << endl;
+	cout << "Cluster start: " << this->_clusterStart << endl;
+}

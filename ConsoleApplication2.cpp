@@ -63,14 +63,13 @@ void LoadFAT32(string text)
     text = text + ">";
     result.readFile(drive, result.getRootCluster());
     result.output();
-    //string temp;
     cin.ignore();
+
     while (OK)
     {
         cout << text << " ";
         getline(cin, cur);
         
-        //cur = "type readMe.txt";
         if (cur.compare("dir") == 0)
         {
             result.printF(result.getListFile());
@@ -105,15 +104,12 @@ void LoadFAT32(string text)
             {
                 cout << "Error! Please try again!" << endl;
             }
-            //cout << temp << endl;
         }
         else if (cur.substr(0, 4).compare("type") == 0)
         {
-         
-            //cout << cur.substr(cur.length() - 4, 4) << endl;
             if (cur.substr(cur.length() - 4, 4).compare(".txt") == 0)
             {
-                string temp = cur.substr(5, cur.length() - 5);// << endl;
+                string temp = cur.substr(5, cur.length() - 5);
                 if (!result.loadFile(drive, temp))
                 {
                     cout << "Error! Please try again!" << endl;
@@ -133,12 +129,31 @@ void LoadFAT32(string text)
             cout << "dir" << endl;
             cout << "type" << endl;
             cout << "cd + fileName" << endl;
+            cout << "inf + fileName" << endl;
+            cout << "cls" << endl;
         }
         else if (cur.compare("exit") == 0)
         {
             break;
         }
-        else
+        else if (cur.substr(0, 3).compare("inf") == 0)
+        {
+            string temp = cur.substr(4, cur.length() - 3);
+
+            if (!result.fileInf(temp))
+            {
+                cout << "Cannot find this file! Please try again!" << endl;
+            }
+            else
+            {
+                // do nothing
+            }
+        }
+        else if (cur.compare("cls") == 0)
+        {
+            system("CLS");
+        }
+        else 
         {
             //do nothing
         }

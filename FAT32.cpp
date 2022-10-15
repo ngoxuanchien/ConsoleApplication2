@@ -486,21 +486,24 @@ vector<ll> readCluster(BYTE *sector, int clusterStart)
 string getNameSupEntry(BYTE *sector, int start)
 {
 	string result = "";
+	stringstream ss;
 
 	for (int i = start + 1; i < start + 11; i += 2)
 	{
-		result = result + hexToASCII(getHex(sector, i, i + 2, 1));
+		ss << hexToASCII(getHex(sector, i, i + 2, 1));
 	}
 
 	for (int i = start + 14; i < start + 26; i += 2)
 	{
-		result = result + hexToASCII(getHex(sector, i, i + 2, 1));
+		ss << hexToASCII(getHex(sector, i, i + 2, 1));
 	}
 
 	for (int i = start + 28; i < start + 32; i += 2)
 	{
-		result = result + hexToASCII(getHex(sector, i, i + 2, 1));
+		ss << hexToASCII(getHex(sector, i, i + 2, 1));
 	}
+
+	result = ss.str();
 
 	return result;
 }
@@ -676,12 +679,13 @@ ll readFileSize(BYTE* sector, int start)
 ll readStartCluster(BYTE* sector, ll start)
 {
 	ll result = 0;
-	string cur = "";
+	//string cur = "";
+	stringstream ss;
 
-	cur = getHex(sector, start + 20, start + 22, 1);
-	cur = cur + getHex(sector, start + 26, start + 28, 1);
+	ss << getHex(sector, start + 20, start + 22, 1);
+	ss << getHex(sector, start + 26, start + 28, 1);
 
-	result = hexToDec(cur);
+	result = hexToDec(ss.str());
 
 	return result;
 }
@@ -739,19 +743,7 @@ vector<File*> FAT32::readRDET(LPCWSTR drive, ll clusterStart)
 
 	if (readByte(drive, readPoint, sector, size))
 	{
-		/*if (clusterStart == 13212)
-		{
-			for (int i = 0; i < 512; i++)
-			{
-				if (i % 16 == 0)
-				{
-					cout << endl;
-				}
-				cout << toHex(sector[i]) << " ";
-			}
-		}*/
 		string cur = "";
-		Folder volume;
 		File* folder;
 		for (int i = 0; i < size; i += 32)
 		{
@@ -784,50 +776,7 @@ vector<File*> FAT32::readRDET(LPCWSTR drive, ll clusterStart)
 				cur = "";
 			}
 		}
-
-		/*vector<File*> temp = volume.getListFile();
-		print(temp);*/
-
-		//for (int i = 0; i < temp.size(); i++)
-		//{
-	
-		//	/*dateTime dt = temp[i]->getDateCreate();
-		//	cout << temp[i]->getName() << ": " << temp[i]->getFileSize() << "\t" << temp[i]->getClusterStart() << "\n";
-		//	vector<ll> tmp = temp[i]->getListSector();
-		//	for (int j = 0; j < tmp.size(); j++)
-		//	{
-		//		cout << tmp[j] << " ";
-		//	}
-		//	cout << endl;
-		//	cout << dt.date << "/" << dt.month << "/" << dt.year << "\t" << dt.hour << ":" << dt.minute << ":" << dt.second << endl;
-		//	dt = temp[i]->getLastAccess();
-		//	cout << dt.date << "/" << dt.month << "/" << dt.year << "\n"; 
-		//	dt = temp[i]->getLatstEdit();
-		//	cout << dt.date << "/" << dt.month << "/" << dt.year << "\t" << dt.hour << ":" << dt.minute << ":" << dt.second << endl;*/
-		//	//cout << temp[i]->getName() << "\t" << temp[i]->getAttributes() << endl;
-		//}
 	}
-
-	/*delete[] sector;
-	sector = new BYTE[512];
-	vector<ll> temp = readListSector(drive, 46957);
-	for (int i = 0; i < temp.size(); i++)
-	{
-		cout << temp[i] << " ";
-	}
-	cout << endl;
-
-	readPoint.QuadPart = 408408 * 512;
-	readByte(drive, readPoint, sector, 512);
-
-	for (int i = 0; i < 512; i++)
-	{
-		if (i % 16 == 0)
-		{
-			cout << endl;
-		}
-		cout << toHex(sector[i]) << " ";
-	}*/
 
 	delete[] sector;
 	return result;
@@ -890,12 +839,10 @@ void FAT32::output()
 
 bool FAT32::showFolder(LPCWSTR drive, const string& folder)
 {
-	//cout << folder << endl;
 	bool result = false;
 
 	if (folder.compare("") == 0)
 	{
-		//print(this->_listFile);
 		result = false;
 	}
 	else
@@ -903,14 +850,10 @@ bool FAT32::showFolder(LPCWSTR drive, const string& folder)
 		vector<File*> listFile = this->_listFile;
 		for (int i = 0; i < listFile.size(); i++)
 		{
-			//cout << listFile[i]->getName() << listFile[i]->getName().length() << endl;
 			if (folder.compare(listFile[i]->getName()) == 0)
 			{
-				//cout << 1 << endl;
 				result = true;
-				//cout << listFile[i]->getClusterStart() << endl;
 				vector<File*> cur = readFile(drive, listFile[i]->getClusterStart());
-				//print(cur);
 				break;
 			}
 			else
@@ -918,6 +861,7 @@ bool FAT32::showFolder(LPCWSTR drive, const string& folder)
 				// Do nothing
 			}
 		}
+
 	}
 
 	return result;
@@ -962,6 +906,37 @@ bool FAT32::loadFile(LPCWSTR drive, string fileName)
 			// Do nothing
 		}
 	}
+	return result;
+}
+
+bool FAT32::fileInf(string file)
+{
+	bool result = false;
+
+	if (file.compare("") == 0)
+	{
+		//print(this->_listFile);
+		result = false;
+	}
+	else
+	{
+		vector<File*> listFile = this->_listFile;
+		for (int i = 0; i < listFile.size(); i++)
+		{
+			if (file.compare(listFile[i]->getName()) == 0)
+			{
+				result = true;
+				this->_listFile[i]->printFile();
+				break;
+			}
+			else
+			{
+				// Do nothing
+			}
+		}
+
+	}
+
 	return result;
 }
 
